@@ -68,22 +68,7 @@ const services = [
       "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?w=600&q=80",
     color: "from-gray-600 to-gray-800",
   },
-  {
-    icon: <FaHome />,
-    title: "Commercial & House Tints",
-    desc: "Residential and commercial window tinting for energy efficiency and privacy.",
-    image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80",
-    color: "from-teal-600 to-teal-900",
-  },
-  {
-    icon: <FaCube />,
-    title: "3D Prints",
-    desc: "Custom 3D printing services for car accessories, prototypes, and unique designs.",
-    image:
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&q=80",
-    color: "from-pink-600 to-rose-800",
-  },
+
   {
     icon: <FaWrench />,
     title: "Handyman",

@@ -133,10 +133,10 @@ const AboutSection = () => {
             </div>
 
             <a
-              href="#services"
+              href="#contact"
               className="gradient-red px-8 py-4 rounded-full font-semibold text-white inline-block hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:scale-105"
             >
-              Our Services →
+              Book Now →
             </a>
           </div>
         </div>
