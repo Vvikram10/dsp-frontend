@@ -7,21 +7,18 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
   const navLinks = [
-    // { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
-    // { name: 'Services', href: '#services' },
-    // { name: 'Packages', href: '#packages' },
     { name: 'Gallery', href: '#gallery' },
-    { name: 'Contact', href: '#contact' },
+
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 40);
     };
+
     window.addEventListener('scroll', handleScroll);
 
-    // Navbar animation
     gsap.fromTo(
       '.nav-item',
       { y: -30, opacity: 0 },
@@ -49,23 +46,24 @@ const Navbar = () => {
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled
-          ? 'bg-dark-900/95 backdrop-blur-lg shadow-lg shadow-black/20 py-1'
-          : 'bg-transparent py-1'
-          }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+      <nav className="fixed top-4 left-0 w-full z-50 flex justify-center">
+
+        {/* Floating Navbar */}
+        <div
+          className={`max-w-7xl w-full px-6 transition-all duration-700 ease-out rounded-full
+  ${scrolled
+              ? 'bg-light  border border-white/5 shadow-[0_0_40px_rgba(0,0,0,0.6)]'
+              : 'bg-transparent border border-transparent shadow-none'
+            }`}
+        >
+          <div className="flex items-center justify-between py-2">
+
             {/* Logo */}
-            <a
-              href="#"
-              className="nav-logo flex items-center rounded-lg"
-            >
+            <a href="#" className="nav-logo flex items-center">
               <img
-                src="https://pub-5c87d77e0678464ea969837b65768808.r2.dev/intopdigital_website/static-images/dsp-logo.png"
+                src="https://pub-5c87d77e0678464ea969837b65768808.r2.dev/dsp-tint/images/dsp-logo-1.png"
                 alt="DSP Tints Logo"
-                className="h-28 w-36 object-contain rounded-lg"
+                className="h-14 object-contain"
               />
             </a>
 
@@ -81,9 +79,16 @@ const Navbar = () => {
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
                 </a>
               ))}
+              {/* CONTACT */}
               <a
-                href="#contact"
-                className="nav-item gradient-red px-6 py-2.5 rounded-full text-sm font-semibold text-white hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:scale-105"
+                href="/contact"
+                className="com-nav-item text-sm font-medium text-white hover:text-[#E63946]"
+              >
+                Contact
+              </a>
+              <a
+                href="#car-cta"
+                className="nav-item gradient-red px-6 py-2 rounded-full text-sm font-semibold text-white hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:scale-105"
               >
                 Book Now
               </a>
@@ -91,11 +96,12 @@ const Navbar = () => {
 
             {/* Mobile Toggle */}
             <button
-              className="lg:hidden text-white text-3xl z-50"
+              className="lg:hidden text-white text-3xl"
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? <HiX /> : <HiMenuAlt3 />}
             </button>
+
           </div>
         </div>
       </nav>
@@ -106,23 +112,26 @@ const Navbar = () => {
           }`}
       >
         <div className="flex flex-col items-center justify-center h-full gap-8">
+
           {navLinks.map((link, i) => (
             <a
               key={i}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="mobile-link font-heading text-3xl font-bold text-white hover:text-primary transition-colors"
+              className="mobile-link text-3xl font-bold text-white hover:text-primary transition-colors"
             >
               {link.name}
             </a>
           ))}
+
           <a
-            href="#contact"
+            href="#car-cta"
             onClick={() => setIsOpen(false)}
             className="mobile-link gradient-red px-10 py-4 rounded-full text-lg font-bold mt-4"
           >
             Book Now
           </a>
+
         </div>
       </div>
     </>

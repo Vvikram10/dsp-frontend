@@ -28,7 +28,7 @@ const BenefitsBanner = () => {
   }, []);
 
   return (
-    <section ref={bannerRef} className="py-10 bg-gradient-to-r from-red-600 to-red-700 relative overflow-hidden">
+    <section ref={bannerRef} className="py-10 bg-[#f7f7eb] relative overflow-hidden ">
       {/* Pattern overlay */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{

@@ -1,236 +1,151 @@
-
-
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// DSP Tinting Services - Professional project gallery
 const galleryImages = [
   {
-    src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=85&auto=format&fit=crop',
+    src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
     title: 'Office Building Tint',
     category: 'Commercial',
     benefit: 'Heat & Glare Reduction',
   },
   {
-    src: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=85&auto=format&fit=crop',
-    title: 'Corporate Headquarters',
+    src: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80',
+    title: 'Corporate HQ',
     category: 'Commercial',
-    benefit: 'Professional Privacy',
+    benefit: 'Privacy',
   },
   {
-    src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=85&auto=format&fit=crop',
-    title: 'Residential Home Tint',
+    src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
+    title: 'Home Tint',
     category: 'Residential',
     benefit: 'UV Protection',
   },
   {
-    src: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=85&auto=format&fit=crop',
-    title: 'Modern Home Privacy Film',
+    src: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
+    title: 'Privacy Film',
     category: 'Residential',
     benefit: 'Daytime Privacy',
   },
-  {
-    src: 'https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=800&q=85&auto=format&fit=crop',
-    title: 'Retail Store Front',
-    category: 'Commercial',
-    benefit: 'Enhanced Visibility',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&q=85&auto=format&fit=crop',
-    title: 'Conference Room Film',
-    category: 'Office',
-    benefit: 'Privacy & Professionalism',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=85&auto=format&fit=crop',
-    title: 'Frosted Decorative Film',
-    category: 'Decorative',
-    benefit: 'Design & Privacy',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=800&q=85&auto=format&fit=crop',
-    title: 'Restaurant Window Tint',
-    category: 'Commercial',
-    benefit: 'Comfort & Branding',
-  },
 ];
 
-const categories = ['All', 'Residential', 'Office', 'Commercial', 'Decorative'];
+const categories = ['All', 'Residential', 'Commercial'];
 
 const GallerySection = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const sectionRef = useRef(null);
-  const gridRef = useRef(null);
 
   const filteredImages =
     activeFilter === 'All'
       ? galleryImages
       : galleryImages.filter((img) => img.category === activeFilter);
 
-  // Scroll animation for header
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        '.gallery-header > *',
-        { y: 60, opacity: 0 },
+      gsap.fromTo('.gallery-header > *',
+        { y: 40, opacity: 0 },
         {
-          y: 0,
-          opacity: 1,
-          stagger: 0.15,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: '.gallery-header',
-            start: 'top 80%',
-          },
+          y: 0, opacity: 1, stagger: 0.12, duration: 0.7,
+          scrollTrigger: { trigger: '.gallery-header', start: 'top 80%' }
         }
       );
     }, sectionRef);
+
     return () => ctx.revert();
   }, []);
 
-  // Gallery items animation on filter change
   useEffect(() => {
-    gsap.fromTo(
-      '.gallery-item',
-      { opacity: 0, scale: 0.8, y: 30 },
-      {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        stagger: 0.08,
-        duration: 0.6,
-        ease: 'power3.out',
-      }
+    gsap.fromTo('.gallery-item',
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, stagger: 0.08, duration: 0.5 }
     );
   }, [activeFilter]);
 
   return (
-    <section
-      id="gallery"
-      ref={sectionRef}
-      className="py-20 lg:py-32 relative overflow-hidden bg-white"
-    >
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          className="absolute -top-40 -right-40 w-80 h-80 rounded-full"
-          style={{
-            background: 'radial-gradient(circle, rgba(239,68,68,0.08) 0%, transparent 70%)',
-          }}
-        ></div>
-        <div
-          className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full"
-          style={{
-            background: 'radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)',
-          }}
-        ></div>
-      </div>
+    <section id="gallery" ref={sectionRef} className="py-20 lg:py-28 bg-white relative">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header */}
-        <div className="gallery-header text-center mb-16">
-          <div className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-red-50 border border-red-200 mb-6">
-            <span className="text-red-600 font-semibold text-sm tracking-[3px] uppercase">
-              Portfolio
-            </span>
-          </div>
-          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 leading-tight">
-        
-            <span className="bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
-              Project Gallery
-            </span>
+      {/* RED GLOW */}
+      <div className="absolute top-0 right-0 w-72 h-72 bg-[#E63946]/10 blur-3xl rounded-full" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* HEADER */}
+        <div className="gallery-header text-center mb-12 sm:mb-16">
+
+          <span className="text-[#E63946] text-xs font-semibold tracking-[3px] uppercase">
+            Portfolio
+          </span>
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#111] mt-4 mb-4">
+            Project <span className="text-[#E63946]">Gallery</span>
           </h2>
-          <p className="text-slate-600 text-lg max-w-3xl mx-auto leading-relaxed">
-            Transforming spaces with premium window tinting solutions. From heat reduction and UV protection
-            to privacy and decorative films—see our professional installations across residential and commercial
-            projects.
+
+          <p className="text-gray-500 text-sm sm:text-base max-w-2xl mx-auto">
+            Explore our recent tinting projects for homes and businesses.
           </p>
         </div>
 
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 mb-16">
+        {/* FILTER */}
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-14">
+
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveFilter(cat)}
-              className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
-                activeFilter === cat
-                  ? 'bg-gradient-to-r from-red-600 to-orange-600 text-white shadow-lg shadow-red-200'
-                  : 'bg-white text-slate-700 border-2 border-slate-200 hover:border-red-300 hover:text-red-600'
-              }`}
+              className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-medium transition-all
+                ${
+                  activeFilter === cat
+                    ? 'bg-[#E63946] text-white'
+                    : 'bg-white border border-gray-200 text-gray-600 hover:border-[#E63946] hover:text-[#E63946]'
+                }`}
             >
               {cat}
             </button>
           ))}
+
         </div>
 
-        {/* Gallery Grid */}
-        <div
-          ref={gridRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-        >
+        {/* GRID */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+
           {filteredImages.map((img, i) => (
             <div
-              key={`${activeFilter}-${i}`}
-              className="gallery-item group relative rounded-xl overflow-hidden aspect-square cursor-pointer transition-all duration-300"
-              style={{
-                boxShadow: '0 4px 15px rgba(0,0,0,0.08)',
-              }}
+              key={i}
+              className="gallery-item group relative rounded-xl overflow-hidden aspect-square border border-gray-200"
             >
-              {/* Image Container */}
+
+              {/* IMAGE */}
               <img
                 src={img.src}
                 alt={img.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-115"
-                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
 
-              {/* Dark Overlay - Optimized for visibility */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+              {/* OVERLAY */}
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition" />
 
-              {/* Content Overlay */}
-              <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-100 group-hover:opacity-100 transition-all duration-300">
-                {/* Category Badge */}
-                <div className="flex items-center gap-2 mb-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
-                  <div className="w-2 h-2 rounded-full bg-red-400"></div>
-                  <span className="text-red-300 text-xs font-bold uppercase tracking-wider">
-                    {img.category}
-                  </span>
-                </div>
+              {/* CONTENT */}
+              <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition">
 
-                {/* Title */}
-                <h3 className="text-white text-lg font-bold mb-2 line-clamp-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0" style={{ transitionDelay: '50ms' }}>
+                <span className="text-[#E63946] text-[10px] uppercase font-semibold">
+                  {img.category}
+                </span>
+
+                <h3 className="text-white text-sm font-semibold mt-1">
                   {img.title}
                 </h3>
 
-                {/* Benefit / Feature */}
-                <p className="text-slate-100 text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0" style={{ transitionDelay: '100ms' }}>
-                  ✓ {img.benefit}
+                <p className="text-gray-200 text-xs mt-1">
+                  {img.benefit}
                 </p>
+
               </div>
 
-              {/* Hover Icon - Appears on hover */}
-              <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg transform group-hover:scale-110">
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2.5}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
-                  />
-                </svg>
-              </div>
             </div>
           ))}
+
         </div>
 
       </div>
